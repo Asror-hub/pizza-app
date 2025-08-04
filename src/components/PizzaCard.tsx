@@ -211,7 +211,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, inde
       <CardContainer onPress={() => onPress(pizza)}>
         <ImageContainer>
           <PizzaImage 
-            source={{ uri: pizza.image }} 
+            source={pizza.image} 
             resizeMode="cover"
           />
           <CategoryBadge category={pizza.category}>

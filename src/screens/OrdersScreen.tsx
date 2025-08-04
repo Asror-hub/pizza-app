@@ -490,7 +490,7 @@ const OrdersScreen: React.FC = () => {
         {item.items.map((cartItem, index) => (
           <OrderItem key={index}>
             <ItemImage 
-              source={{ uri: cartItem.pizza.image }} 
+              source={cartItem.pizza.image} 
               resizeMode="cover"
             />
             <ItemDetails>

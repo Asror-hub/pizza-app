@@ -628,7 +628,7 @@ const PizzaDetailsScreen: React.FC<PizzaDetailsScreenProps> = ({
                 <Text style={{ fontSize: 20, color: theme.colors.textPrimary }}>✕</Text>
               </CloseButton>
               
-              <PizzaImage source={{ uri: pizza.image }} />
+              <PizzaImage source={pizza.image} />
               
               <CategoryBadge category={pizza.category}>
                 <CategoryText>{getCategoryLabel(pizza.category)}</CategoryText>

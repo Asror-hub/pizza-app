@@ -229,7 +229,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
     <CartItemContainer>
       <ImageContainer>
         <PizzaImage 
-          source={{ uri: item.pizza.image }} 
+                      source={item.pizza.image} 
           resizeMode="cover"
         />
         <ImageOverlay />

@@ -3,7 +3,7 @@ export interface Pizza {
   name: string;
   description: string;
   price: number;
-  image: string;
+  image: any; // Can be string URL or require() statement
   category: 'classic' | 'premium' | 'vegetarian' | 'spicy';
   ingredients: string[];
   size: 'small' | 'medium' | 'large';
