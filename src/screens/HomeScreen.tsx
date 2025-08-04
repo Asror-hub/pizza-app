@@ -27,24 +27,26 @@ interface HomeScreenProps {
 
 const CategoryFilter = styled.ScrollView`
   margin-bottom: ${theme.spacing.lg}px;
+  padding-left: ${theme.spacing.xs}px;
 `;
 
 const CategoryButton = styled.TouchableOpacity<{ active: boolean }>`
   padding: ${theme.spacing.sm}px ${theme.spacing.md}px;
   margin-right: ${theme.spacing.sm}px;
   border-radius: ${theme.borderRadius.round}px;
-  background-color: ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.backgroundSecondary};
+  background-color: ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.backgroundTertiary};
   border: 1px solid ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.border};
   flex-direction: row;
   align-items: center;
+  min-height: 36px;
 `;
 
 const CategoryButtonText = styled.Text<{ active: boolean }>`
   font-size: ${theme.typography.fontSize.sm}px;
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-weight: ${theme.typography.fontWeight.semibold};
   color: ${(props: { active: boolean }) => props.active ? theme.colors.textInverse : theme.colors.textPrimary};
-  padding-bottom: 2px;
   margin-left: 6px;
+  letter-spacing: 0.3px;
 `;
 
 const CategoryImage = styled.Image`
@@ -53,8 +55,34 @@ const CategoryImage = styled.Image`
   border-radius: 8px;
 `;
 
-const SectionTitle = styled(Title)`
+const SectionTitle = styled.Text`
+  font-size: ${theme.typography.fontSize.xl}px;
+  font-weight: ${theme.typography.fontWeight.bold};
+  color: ${theme.colors.textPrimary};
   margin-bottom: ${theme.spacing.md}px;
+  letter-spacing: -0.5px;
+`;
+
+const EmptyStateContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: ${theme.spacing.xxxl}px;
+`;
+
+const EmptyStateText = styled.Text`
+  font-size: ${theme.typography.fontSize.lg}px;
+  font-weight: ${theme.typography.fontWeight.medium};
+  color: ${theme.colors.textSecondary};
+  text-align: center;
+  margin-top: ${theme.spacing.md}px;
+`;
+
+const EmptyStateSubtext = styled.Text`
+  font-size: ${theme.typography.fontSize.md}px;
+  color: ${theme.colors.textTertiary};
+  text-align: center;
+  margin-top: ${theme.spacing.sm}px;
 `;
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPizzaPress, cartItemCount }) => {
@@ -112,44 +140,37 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
   };
 
   const handleScroll = (event: any) => {
-    // Scroll handler for pizza card animations only
-    // Category filter animations removed
+    // Header scroll animation could be added here
   };
 
   const handleCategoryPress = (categoryId: string) => {
-    // Animate category selection
     setSelectedCategory(categoryId);
-    
-    // Add a subtle animation to the selected category
-    const selectedButton = categories.find(cat => cat.id === categoryId);
-    if (selectedButton) {
-      // You could add more animation logic here if needed
-    }
   };
 
   const renderPizzaItem = ({ item, index }: { item: Pizza; index: number }) => (
-    <PizzaCard 
-      pizza={item} 
-      onAddToCart={onAddToCart} 
+    <PizzaCard
+      pizza={item}
+      onAddToCart={onAddToCart}
       onPress={onPizzaPress}
       index={index}
     />
   );
 
   const renderEmptyState = () => (
-    <EmptyContainer>
-      <EmptyText>
+    <EmptyStateContainer>
+      <EmptyStateText>🍕 No pizzas found</EmptyStateText>
+      <EmptyStateSubtext>
         {searchQuery.trim() 
-          ? `No pizzas found for "${searchQuery}"`
-          : 'No pizzas found in this category'
+          ? `No pizzas match "${searchQuery}"`
+          : `No pizzas in the ${selectedCategory} category`
         }
-      </EmptyText>
-    </EmptyContainer>
+      </EmptyStateSubtext>
+    </EmptyStateContainer>
   );
 
   return (
-    <SafeContainer>
-      <Header 
+    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+      <Header
         cartItemCount={cartItemCount}
         onSearchPress={handleSearchPress}
         isSearchMode={isSearchMode}
@@ -158,19 +179,22 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
         onSearchSubmit={handleSearchSubmit}
         onSearchCancel={handleSearchCancel}
       />
-      <View style={{ backgroundColor: theme.colors.backgroundSecondary, flex: 1 }}>
+      
+      <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         {/* Category Filter - Hide when searching */}
         {!isSearchMode && (
-          <View style={{ paddingLeft: theme.spacing.xs, marginTop: theme.spacing.md}}>
-            <CategoryFilter 
-              horizontal 
+          <View style={{ paddingLeft: theme.spacing.xs, marginTop: theme.spacing.md }}>
+            <CategoryFilter
+              horizontal
               showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingRight: theme.spacing.lg }}
             >
               {categories.map((category) => (
                 <CategoryButton
                   key={category.id}
                   active={selectedCategory === category.id}
                   onPress={() => handleCategoryPress(category.id)}
+                  activeOpacity={0.7}
                 >
                   <CategoryImage source={require('../../assets/images/pizza_1.png')} />
                   <CategoryButtonText active={selectedCategory === category.id}>
@@ -181,9 +205,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
             </CategoryFilter>
           </View>
         )}
-
-        {/* Pizza List */}
-        <View style={{ paddingHorizontal: theme.spacing.md }}>
+        
+        <View style={{ paddingHorizontal: theme.spacing.md, flex: 1 }}>
           {isSearchMode && searchQuery.trim() && (
             <SectionTitle>Search Results</SectionTitle>
           )}
@@ -193,13 +216,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={renderEmptyState}
-            contentContainerStyle={{ paddingBottom: theme.spacing.xxl }}
+            contentContainerStyle={{ paddingBottom: theme.spacing.xxxl }}
             onScroll={handleScroll}
             scrollEventThrottle={16}
           />
         </View>
       </View>
-    </SafeContainer>
+    </View>
   );
 };
 

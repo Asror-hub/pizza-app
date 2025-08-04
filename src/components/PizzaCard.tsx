@@ -12,95 +12,108 @@ interface PizzaCardProps {
 }
 
 const CardContainer = styled.TouchableOpacity`
-  background-color: ${theme.colors.background};
-  border-radius: 16px;
+  background-color: ${theme.colors.backgroundCard};
+  border-radius: ${theme.borderRadius.lg}px;
   margin-top: ${theme.spacing.sm}px;
   margin-bottom: ${theme.spacing.sm}px;
   margin-horizontal: ${theme.spacing.sm}px;
-  shadow-color: ${theme.colors.shadow};
-  shadow-offset: 0px 8px;
-  shadow-opacity: 0.15;
-  shadow-radius: 20px;
-  elevation: 12;
+  border: 1px solid ${theme.colors.border};
   overflow: hidden;
-  border: 1px solid ${theme.colors.borderLight};
+  position: relative;
+`;
+
+const GlassOverlay = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${theme.glass.background};
+  border-radius: ${theme.borderRadius.lg}px;
+  z-index: 1;
+`;
+
+const ContentWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding: ${theme.spacing.md}px;
+  position: relative;
+  z-index: 2;
 `;
 
 const ImageContainer = styled.View`
   position: relative;
-  width: 120px;
-  height: 120px;
-  background-color: ${theme.colors.backgroundSecondary};
+  width: 100px;
+  height: 100px;
+  background-color: ${theme.colors.backgroundTertiary};
+  border-radius: ${theme.borderRadius.md}px;
   overflow: hidden;
-  border-radius: 12px;
+  margin-right: ${theme.spacing.md}px;
 `;
 
 const PizzaImage = styled.Image`
   width: 100%;
   height: 100%;
-  resize-mode: contain;
+  resize-mode: cover;
 `;
 
 const CategoryBadge = styled.View<{ category: string }>`
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: -4px;
+  right: -4px;
   background-color: ${(props: { category: string }) => {
     switch (props.category) {
       case 'classic': return theme.colors.primary;
-      case 'premium': return theme.colors.accent;
-      case 'vegetarian': return theme.colors.success;
+      case 'premium': return theme.colors.secondary;
+      case 'vegetarian': return theme.colors.accent;
       case 'spicy': return theme.colors.error;
       default: return theme.colors.primary;
     }
   }};
-  padding: 4px 8px;
-  border-radius: 12px;
-  shadow-color: ${theme.colors.shadowDark};
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.2;
-  shadow-radius: 4px;
-  elevation: 3;
+  padding: 3px 6px;
+  border-radius: ${theme.borderRadius.xs}px;
+  border: 1px solid ${theme.colors.backgroundCard};
 `;
 
 const CategoryText = styled.Text`
-  font-size: 9px;
-  font-weight: 600;
+  font-size: ${theme.typography.fontSize.xs}px;
+  font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.textInverse};
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
 `;
 
 const ContentContainer = styled.View`
   flex: 1;
-  padding: 20px;
-  background-color: ${theme.colors.background};
   justify-content: space-between;
+  height: 100px;
+`;
+
+const TopContent = styled.View`
+  flex: 1;
 `;
 
 const PizzaName = styled.Text`
-  font-size: 18px;
-  font-weight: 700;
+  font-size: ${theme.typography.fontSize.lg}px;
+  font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.textPrimary};
-  margin-bottom: 6px;
-  line-height: 24px;
+  margin-bottom: ${theme.spacing.xs}px;
+  line-height: ${theme.typography.lineHeight.tight};
 `;
 
 const PizzaDescription = styled.Text`
-  font-size: 13px;
-  font-weight: 400;
+  font-size: ${theme.typography.fontSize.sm}px;
+  font-weight: ${theme.typography.fontWeight.regular};
   color: ${theme.colors.textSecondary};
-  line-height: 18px;
-  margin-bottom: 12px;
+  line-height: ${theme.typography.lineHeight.normal};
+  flex: 1;
 `;
 
 const BottomRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 12px;
-  border-top-width: 1px;
-  border-top-color: ${theme.colors.borderLight};
+  margin-top: ${theme.spacing.sm}px;
 `;
 
 const PriceContainer = styled.View`
@@ -108,64 +121,62 @@ const PriceContainer = styled.View`
 `;
 
 const Price = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
+  font-size: ${theme.typography.fontSize.xl}px;
+  font-weight: ${theme.typography.fontWeight.extrabold};
   color: ${theme.colors.primary};
   margin-bottom: 2px;
 `;
 
 const PreparationTime = styled.Text`
-  font-size: 11px;
+  font-size: ${theme.typography.fontSize.xs}px;
   color: ${theme.colors.textTertiary};
-  font-weight: 500;
+  font-weight: ${theme.typography.fontWeight.medium};
 `;
 
 const AddButton = styled.TouchableOpacity`
   background-color: ${theme.colors.primary};
-  padding: 10px 20px;
-  border-radius: 20px;
-  min-width: 90px;
+  padding: ${theme.spacing.sm}px ${theme.spacing.md}px;
+  border-radius: ${theme.borderRadius.round}px;
+  min-width: 80px;
   align-items: center;
   justify-content: center;
-  shadow-color: ${theme.colors.primary};
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.3;
-  shadow-radius: 8px;
-  elevation: 4;
+  border: 1px solid ${theme.colors.primaryLight};
 `;
 
 const AddButtonText = styled.Text`
-  font-size: 13px;
-  font-weight: 600;
+  font-size: ${theme.typography.fontSize.sm}px;
+  font-weight: ${theme.typography.fontWeight.semibold};
   color: ${theme.colors.textInverse};
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;
 
 const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, index = 0 }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const slideAnim = useRef(new Animated.Value(50)).current;
-  const scaleAnim = useRef(new Animated.Value(0.95)).current;
+  const slideAnim = useRef(new Animated.Value(30)).current;
+  const scaleAnim = useRef(new Animated.Value(0.9)).current;
   const buttonScaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     // Staggered entrance animation based on index
-    const delay = index * 150; // 150ms delay between each card
+    const delay = index * 100; // Faster animation
     
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 800,
+        duration: 600,
         delay,
         useNativeDriver: true,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
-        duration: 800,
+        duration: 600,
         delay,
         useNativeDriver: true,
       }),
       Animated.timing(scaleAnim, {
         toValue: 1,
-        duration: 800,
+        duration: 600,
         delay,
         useNativeDriver: true,
       }),
@@ -213,12 +224,13 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, inde
         ],
       }}
     >
-      <CardContainer onPress={() => onPress(pizza)}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <CardContainer onPress={() => onPress(pizza)} activeOpacity={0.9}>
+        <GlassOverlay />
+        <ContentWrapper>
           <ImageContainer>
             <PizzaImage 
               source={pizza.image} 
-              resizeMode="contain"
+              resizeMode="cover"
             />
             <CategoryBadge category={pizza.category}>
               <CategoryText>{getCategoryLabel(pizza.category)}</CategoryText>
@@ -226,10 +238,10 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, inde
           </ImageContainer>
           
           <ContentContainer>
-            <View>
+            <TopContent>
               <PizzaName>{pizza.name}</PizzaName>
-              <PizzaDescription>{pizza.description}</PizzaDescription>
-            </View>
+              <PizzaDescription numberOfLines={2}>{pizza.description}</PizzaDescription>
+            </TopContent>
             
             <BottomRow>
               <PriceContainer>
@@ -244,7 +256,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, inde
               </Animated.View>
             </BottomRow>
           </ContentContainer>
-        </View>
+        </ContentWrapper>
       </CardContainer>
     </Animated.View>
   );
