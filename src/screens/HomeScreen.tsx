@@ -152,7 +152,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
       <PaddingContainer style={{ backgroundColor: theme.colors.backgroundSecondary }}>
         {/* Category Filter - Hide when searching */}
         {!isSearchMode && (
-          <CategoryFilter horizontal showsHorizontalScrollIndicator={false}>
+          <CategoryFilter 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: theme.spacing.md }}
+          >
             {categories.map((category) => (
               <CategoryButton
                 key={category.id}
