@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { FlatList, Animated } from 'react-native';
+import { FlatList, Animated, View } from 'react-native';
 import styled from 'styled-components/native';
 import { theme } from '../styles/theme';
 import { Pizza } from '../types';
@@ -152,22 +152,24 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
       <PaddingContainer style={{ backgroundColor: theme.colors.backgroundSecondary }}>
         {/* Category Filter - Hide when searching */}
         {!isSearchMode && (
-          <CategoryFilter 
-            horizontal 
-            showsHorizontalScrollIndicator={false}
-          >
-            {categories.map((category) => (
-              <CategoryButton
-                key={category.id}
-                active={selectedCategory === category.id}
-                onPress={() => handleCategoryPress(category.id)}
-              >
-                <CategoryButtonText active={selectedCategory === category.id}>
-                  {category.label}
-                </CategoryButtonText>
-              </CategoryButton>
-            ))}
-          </CategoryFilter>
+          <View style={{ marginRight: -theme.spacing.md, paddingLeft: theme.spacing.md }}>
+            <CategoryFilter 
+              horizontal 
+              showsHorizontalScrollIndicator={false}
+            >
+              {categories.map((category) => (
+                <CategoryButton
+                  key={category.id}
+                  active={selectedCategory === category.id}
+                  onPress={() => handleCategoryPress(category.id)}
+                >
+                  <CategoryButtonText active={selectedCategory === category.id}>
+                    {category.label}
+                  </CategoryButtonText>
+                </CategoryButton>
+              ))}
+            </CategoryFilter>
+          </View>
         )}
 
         {/* Pizza List */}
