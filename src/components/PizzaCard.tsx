@@ -13,30 +13,29 @@ interface PizzaCardProps {
 
 const CardContainer = styled.TouchableOpacity`
   background-color: ${theme.colors.background};
-  border-top-left-radius: ${theme.borderRadius.lg}px;
-  border-top-right-radius: ${theme.borderRadius.lg}px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-radius: ${theme.borderRadius.lg}px;
   margin-top: ${theme.spacing.sm}px;
   margin-bottom: ${theme.spacing.md}px;
+  margin-horizontal: ${theme.spacing.sm}px;
   shadow-color: #000000;
-  shadow-offset: 0px 8px;
-  shadow-opacity: 0.4;
-  shadow-radius: 16px;
-  elevation: 12;
+  shadow-offset: 0px 4px;
+  shadow-opacity: 0.3;
+  shadow-radius: 12px;
+  elevation: 8;
   overflow: hidden;
 `;
 
 const ImageContainer = styled.View`
   position: relative;
-  height: 180px;
-  background-color: ${theme.colors.backgroundSecondary};
+  height: 200px;
+  background-color: #f8f9fa;
+  overflow: hidden;
 `;
 
 const PizzaImage = styled.Image`
   width: 100%;
   height: 100%;
-  resize-mode: cover;
+  resize-mode: contain;
 `;
 
 const CategoryBadge = styled.View<{ category: string }>`
