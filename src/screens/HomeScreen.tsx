@@ -149,10 +149,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
         onSearchSubmit={handleSearchSubmit}
         onSearchCancel={handleSearchCancel}
       />
-      <PaddingContainer style={{ backgroundColor: theme.colors.backgroundSecondary }}>
+      <View style={{ backgroundColor: theme.colors.backgroundSecondary, flex: 1 }}>
         {/* Category Filter - Hide when searching */}
         {!isSearchMode && (
-          <View style={{ marginRight: -theme.spacing.md, paddingLeft: theme.spacing.xs }}>
+          <View style={{ paddingLeft: theme.spacing.xs }}>
             <CategoryFilter 
               horizontal 
               showsHorizontalScrollIndicator={false}
@@ -173,20 +173,22 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
         )}
 
         {/* Pizza List */}
-        {isSearchMode && searchQuery.trim() && (
-          <SectionTitle>Search Results</SectionTitle>
-        )}
-        <FlatList
-          data={filteredPizzas}
-          renderItem={renderPizzaItem}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={renderEmptyState}
-          contentContainerStyle={{ paddingBottom: theme.spacing.xxl }}
-          onScroll={handleScroll}
-          scrollEventThrottle={16}
-        />
-      </PaddingContainer>
+        <View style={{ paddingHorizontal: theme.spacing.md }}>
+          {isSearchMode && searchQuery.trim() && (
+            <SectionTitle>Search Results</SectionTitle>
+          )}
+          <FlatList
+            data={filteredPizzas}
+            renderItem={renderPizzaItem}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={renderEmptyState}
+            contentContainerStyle={{ paddingBottom: theme.spacing.xxl }}
+            onScroll={handleScroll}
+            scrollEventThrottle={16}
+          />
+        </View>
+      </View>
     </SafeContainer>
   );
 };
