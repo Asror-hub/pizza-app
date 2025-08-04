@@ -28,9 +28,11 @@ const CardContainer = styled.TouchableOpacity`
 
 const ImageContainer = styled.View`
   position: relative;
-  height: 220px;
+  width: 120px;
+  height: 120px;
   background-color: ${theme.colors.backgroundSecondary};
   overflow: hidden;
+  border-radius: 12px;
 `;
 
 const PizzaImage = styled.Image`
@@ -70,8 +72,10 @@ const CategoryText = styled.Text`
 `;
 
 const ContentContainer = styled.View`
-  padding: 16px 20px;
+  flex: 1;
+  padding: 20px;
   background-color: ${theme.colors.background};
+  justify-content: space-between;
 `;
 
 const PizzaName = styled.Text`
@@ -210,33 +214,37 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, inde
       }}
     >
       <CardContainer onPress={() => onPress(pizza)}>
-        <ImageContainer>
-          <PizzaImage 
-            source={pizza.image} 
-            resizeMode="cover"
-          />
-          <CategoryBadge category={pizza.category}>
-            <CategoryText>{getCategoryLabel(pizza.category)}</CategoryText>
-          </CategoryBadge>
-        </ImageContainer>
-        
-        <ContentContainer>
-          <PizzaName>{pizza.name}</PizzaName>
-          <PizzaDescription>{pizza.description}</PizzaDescription>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <ImageContainer>
+            <PizzaImage 
+              source={pizza.image} 
+              resizeMode="contain"
+            />
+            <CategoryBadge category={pizza.category}>
+              <CategoryText>{getCategoryLabel(pizza.category)}</CategoryText>
+            </CategoryBadge>
+          </ImageContainer>
           
-          <BottomRow>
-            <PriceContainer>
-              <Price>${pizza.price.toFixed(2)}</Price>
-              <PreparationTime>⏱️ {pizza.preparationTime} min</PreparationTime>
-            </PriceContainer>
+          <ContentContainer>
+            <View>
+              <PizzaName>{pizza.name}</PizzaName>
+              <PizzaDescription>{pizza.description}</PizzaDescription>
+            </View>
             
-            <Animated.View style={{ transform: [{ scale: buttonScaleAnim }] }}>
-              <AddButton onPress={handleViewDetails} activeOpacity={0.8}>
-                <AddButtonText>Order</AddButtonText>
-              </AddButton>
-            </Animated.View>
-          </BottomRow>
-        </ContentContainer>
+            <BottomRow>
+              <PriceContainer>
+                <Price>${pizza.price.toFixed(2)}</Price>
+                <PreparationTime>⏱️ {pizza.preparationTime} min</PreparationTime>
+              </PriceContainer>
+              
+              <Animated.View style={{ transform: [{ scale: buttonScaleAnim }] }}>
+                <AddButton onPress={handleViewDetails} activeOpacity={0.8}>
+                  <AddButtonText>Order</AddButtonText>
+                </AddButton>
+              </Animated.View>
+            </BottomRow>
+          </ContentContainer>
+        </View>
       </CardContainer>
     </Animated.View>
   );
