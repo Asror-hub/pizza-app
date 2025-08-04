@@ -29,7 +29,7 @@ const CardContainer = styled.TouchableOpacity`
 const ImageContainer = styled.View`
   position: relative;
   height: 220px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background-color: #f8f9fa;
   overflow: hidden;
 `;
 
@@ -117,7 +117,7 @@ const PreparationTime = styled.Text`
 `;
 
 const AddButton = styled.TouchableOpacity`
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background-color: #3b82f6;
   padding: 12px 24px;
   border-radius: 25px;
   min-width: 100px;
