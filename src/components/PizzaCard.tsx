@@ -14,8 +14,8 @@ interface PizzaCardProps {
 const CardContainer = styled.TouchableOpacity`
   background-color: ${theme.colors.background};
   border-radius: 16px;
-  margin-top: ${theme.spacing.md}px;
-  margin-bottom: ${theme.spacing.md}px;
+  margin-top: ${theme.spacing.sm}px;
+  margin-bottom: ${theme.spacing.sm}px;
   margin-horizontal: ${theme.spacing.sm}px;
   shadow-color: ${theme.colors.shadow};
   shadow-offset: 0px 8px;
