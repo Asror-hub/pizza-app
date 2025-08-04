@@ -43,8 +43,8 @@ const PizzaImage = styled.Image`
 
 const CategoryBadge = styled.View<{ category: string }>`
   position: absolute;
-  top: -8px;
-  right: -8px;
+  top: -6px;
+  right: -6px;
   background-color: ${(props: { category: string }) => {
     switch (props.category) {
       case 'classic': return theme.colors.primary;
@@ -54,8 +54,8 @@ const CategoryBadge = styled.View<{ category: string }>`
       default: return theme.colors.primary;
     }
   }};
-  padding: 6px 12px;
-  border-radius: 16px;
+  padding: 4px 8px;
+  border-radius: 12px;
   shadow-color: ${theme.colors.shadowDark};
   shadow-offset: 0px 2px;
   shadow-opacity: 0.2;
@@ -64,11 +64,11 @@ const CategoryBadge = styled.View<{ category: string }>`
 `;
 
 const CategoryText = styled.Text`
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: ${theme.colors.textInverse};
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 `;
 
 const ContentContainer = styled.View`
