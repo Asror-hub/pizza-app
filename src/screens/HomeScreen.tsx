@@ -152,7 +152,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
       <View style={{ backgroundColor: theme.colors.backgroundSecondary, flex: 1 }}>
         {/* Category Filter - Hide when searching */}
         {!isSearchMode && (
-          <View style={{ paddingLeft: theme.spacing.xs, marginTop: theme.spacing.md, marginBottom: '-10px'}}>
+          <View style={{ paddingLeft: theme.spacing.xs, marginTop: theme.spacing.md}}>
             <CategoryFilter 
               horizontal 
               showsHorizontalScrollIndicator={false}
@@ -164,7 +164,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
                   onPress={() => handleCategoryPress(category.id)}
                 >
                   <CategoryButtonText active={selectedCategory === category.id}>
-                    {category.label}
+                    🍕 {category.label}
                   </CategoryButtonText>
                 </CategoryButton>
               ))}
