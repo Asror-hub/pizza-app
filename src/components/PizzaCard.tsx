@@ -12,24 +12,24 @@ interface PizzaCardProps {
 }
 
 const CardContainer = styled.TouchableOpacity`
-  background-color: #ffffff;
+  background-color: ${theme.colors.background};
   border-radius: 16px;
   margin-top: ${theme.spacing.md}px;
   margin-bottom: ${theme.spacing.md}px;
-  margin-horizontal: ${theme.spacing.md}px;
-  shadow-color: rgba(0, 0, 0, 0.1);
+  margin-horizontal: ${theme.spacing.sm}px;
+  shadow-color: ${theme.colors.shadow};
   shadow-offset: 0px 8px;
   shadow-opacity: 0.15;
   shadow-radius: 20px;
   elevation: 12;
   overflow: hidden;
-  border: 1px solid #f0f0f0;
+  border: 1px solid ${theme.colors.borderLight};
 `;
 
 const ImageContainer = styled.View`
   position: relative;
   height: 220px;
-  background-color: #f8f9fa;
+  background-color: ${theme.colors.backgroundSecondary};
   overflow: hidden;
 `;
 
@@ -45,16 +45,16 @@ const CategoryBadge = styled.View<{ category: string }>`
   left: 20px;
   background-color: ${(props: { category: string }) => {
     switch (props.category) {
-      case 'classic': return '#3b82f6';
-      case 'premium': return '#f59e0b';
-      case 'vegetarian': return '#10b981';
-      case 'spicy': return '#ef4444';
-      default: return '#3b82f6';
+      case 'classic': return theme.colors.primary;
+      case 'premium': return theme.colors.accent;
+      case 'vegetarian': return theme.colors.success;
+      case 'spicy': return theme.colors.error;
+      default: return theme.colors.primary;
     }
   }};
   padding: 8px 16px;
   border-radius: 20px;
-  shadow-color: rgba(0, 0, 0, 0.15);
+  shadow-color: ${theme.colors.shadowDark};
   shadow-offset: 0px 2px;
   shadow-opacity: 0.2;
   shadow-radius: 4px;
@@ -64,39 +64,39 @@ const CategoryBadge = styled.View<{ category: string }>`
 const CategoryText = styled.Text`
   font-size: 11px;
   font-weight: 600;
-  color: #ffffff;
+  color: ${theme.colors.textInverse};
   text-transform: uppercase;
   letter-spacing: 1px;
 `;
 
 const ContentContainer = styled.View`
-  padding: 24px;
-  background-color: #ffffff;
+  padding: 16px 20px;
+  background-color: ${theme.colors.background};
 `;
 
 const PizzaName = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 8px;
-  line-height: 28px;
+  color: ${theme.colors.textPrimary};
+  margin-bottom: 6px;
+  line-height: 24px;
 `;
 
 const PizzaDescription = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
-  color: #6b7280;
-  line-height: 22px;
-  margin-bottom: 20px;
+  color: ${theme.colors.textSecondary};
+  line-height: 18px;
+  margin-bottom: 12px;
 `;
 
 const BottomRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 12px;
   border-top-width: 1px;
-  border-top-color: #f3f4f6;
+  border-top-color: ${theme.colors.borderLight};
 `;
 
 const PriceContainer = styled.View`
@@ -104,26 +104,26 @@ const PriceContainer = styled.View`
 `;
 
 const Price = styled.Text`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  color: #3b82f6;
-  margin-bottom: 4px;
+  color: ${theme.colors.primary};
+  margin-bottom: 2px;
 `;
 
 const PreparationTime = styled.Text`
-  font-size: 12px;
-  color: #9ca3af;
+  font-size: 11px;
+  color: ${theme.colors.textTertiary};
   font-weight: 500;
 `;
 
 const AddButton = styled.TouchableOpacity`
-  background-color: #3b82f6;
-  padding: 12px 24px;
-  border-radius: 25px;
-  min-width: 100px;
+  background-color: ${theme.colors.primary};
+  padding: 10px 20px;
+  border-radius: 20px;
+  min-width: 90px;
   align-items: center;
   justify-content: center;
-  shadow-color: rgba(59, 130, 246, 0.3);
+  shadow-color: ${theme.colors.primary};
   shadow-offset: 0px 4px;
   shadow-opacity: 0.3;
   shadow-radius: 8px;
@@ -131,9 +131,9 @@ const AddButton = styled.TouchableOpacity`
 `;
 
 const AddButtonText = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #ffffff;
+  color: ${theme.colors.textInverse};
 `;
 
 const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, index = 0 }) => {
