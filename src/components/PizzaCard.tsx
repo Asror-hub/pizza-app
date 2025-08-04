@@ -12,23 +12,24 @@ interface PizzaCardProps {
 }
 
 const CardContainer = styled.TouchableOpacity`
-  background-color: ${theme.colors.background};
-  border-radius: ${theme.borderRadius.lg}px;
-  margin-top: ${theme.spacing.sm}px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  margin-top: ${theme.spacing.md}px;
   margin-bottom: ${theme.spacing.md}px;
-  margin-horizontal: ${theme.spacing.sm}px;
-  shadow-color: #000000;
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.3;
-  shadow-radius: 12px;
-  elevation: 8;
+  margin-horizontal: ${theme.spacing.md}px;
+  shadow-color: rgba(0, 0, 0, 0.1);
+  shadow-offset: 0px 8px;
+  shadow-opacity: 0.15;
+  shadow-radius: 20px;
+  elevation: 12;
   overflow: hidden;
+  border: 1px solid #f0f0f0;
 `;
 
 const ImageContainer = styled.View`
   position: relative;
-  height: 200px;
-  background-color: #f8f9fa;
+  height: 220px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   overflow: hidden;
 `;
 
@@ -40,61 +41,62 @@ const PizzaImage = styled.Image`
 
 const CategoryBadge = styled.View<{ category: string }>`
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 20px;
+  left: 20px;
   background-color: ${(props: { category: string }) => {
     switch (props.category) {
-      case 'classic': return theme.colors.primary;
-      case 'premium': return theme.colors.accent;
-      case 'vegetarian': return theme.colors.success;
-      case 'spicy': return theme.colors.error;
-      default: return theme.colors.primary;
+      case 'classic': return '#3b82f6';
+      case 'premium': return '#f59e0b';
+      case 'vegetarian': return '#10b981';
+      case 'spicy': return '#ef4444';
+      default: return '#3b82f6';
     }
   }};
-  padding: ${theme.spacing.xs}px ${theme.spacing.sm}px;
-  border-radius: ${theme.borderRadius.round}px;
-  shadow-color: rgba(0, 0, 0, 0.2);
-  shadow-offset: 0px 1px;
-  shadow-opacity: 0.3;
-  shadow-radius: 2px;
-  elevation: 2;
+  padding: 8px 16px;
+  border-radius: 20px;
+  shadow-color: rgba(0, 0, 0, 0.15);
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.2;
+  shadow-radius: 4px;
+  elevation: 3;
 `;
 
 const CategoryText = styled.Text`
-  font-size: ${theme.typography.fontSize.xs}px;
-  font-weight: ${theme.typography.fontWeight.medium};
-  color: ${theme.colors.textInverse};
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 `;
 
 const ContentContainer = styled.View`
-  padding: ${theme.spacing.md}px;
+  padding: 24px;
+  background-color: #ffffff;
 `;
 
 const PizzaName = styled.Text`
-  font-size: ${theme.typography.fontSize.lg}px;
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.textPrimary};
-  margin-bottom: ${theme.spacing.xs}px;
-  line-height: ${theme.typography.lineHeight.tight * theme.typography.fontSize.lg}px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 8px;
+  line-height: 28px;
 `;
 
 const PizzaDescription = styled.Text`
-  font-size: ${theme.typography.fontSize.sm}px;
-  font-weight: ${theme.typography.fontWeight.regular};
-  color: ${theme.colors.textSecondary};
-  line-height: ${theme.typography.lineHeight.normal * theme.typography.fontSize.sm}px;
-  margin-bottom: ${theme.spacing.md}px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 22px;
+  margin-bottom: 20px;
 `;
 
 const BottomRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: ${theme.spacing.md}px;
+  padding-top: 20px;
   border-top-width: 1px;
-  border-top-color: ${theme.colors.borderLight};
+  border-top-color: #f3f4f6;
 `;
 
 const PriceContainer = styled.View`
@@ -102,36 +104,36 @@ const PriceContainer = styled.View`
 `;
 
 const Price = styled.Text`
-  font-size: ${theme.typography.fontSize.xl}px;
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.primary};
-  margin-bottom: ${theme.spacing.xs}px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 4px;
 `;
 
 const PreparationTime = styled.Text`
-  font-size: ${theme.typography.fontSize.xs}px;
-  color: ${theme.colors.textSecondary};
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
 `;
 
 const AddButton = styled.TouchableOpacity`
-  background-color: ${theme.colors.primary};
-  padding: ${theme.spacing.sm}px ${theme.spacing.lg}px;
-  border-radius: ${theme.borderRadius.round}px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  padding: 12px 24px;
+  border-radius: 25px;
   min-width: 100px;
   align-items: center;
   justify-content: center;
-  shadow-color: rgba(0, 0, 0, 0.1);
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.2;
-  shadow-radius: 4px;
-  elevation: 2;
+  shadow-color: rgba(59, 130, 246, 0.3);
+  shadow-offset: 0px 4px;
+  shadow-opacity: 0.3;
+  shadow-radius: 8px;
+  elevation: 4;
 `;
 
 const AddButtonText = styled.Text`
-  font-size: ${theme.typography.fontSize.sm}px;
-  font-weight: ${theme.typography.fontWeight.semibold};
-  color: ${theme.colors.textInverse};
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
 `;
 
 const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, index = 0 }) => {
