@@ -35,6 +35,8 @@ const CategoryButton = styled.TouchableOpacity<{ active: boolean }>`
   border-radius: ${theme.borderRadius.round}px;
   background-color: ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.backgroundSecondary};
   border: 1px solid ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.border};
+  flex-direction: row;
+  align-items: center;
 `;
 
 const CategoryButtonText = styled.Text<{ active: boolean }>`
@@ -42,6 +44,13 @@ const CategoryButtonText = styled.Text<{ active: boolean }>`
   font-weight: ${theme.typography.fontWeight.medium};
   color: ${(props: { active: boolean }) => props.active ? theme.colors.textInverse : theme.colors.textPrimary};
   padding-bottom: 2px;
+  margin-left: 6px;
+`;
+
+const CategoryImage = styled.Image`
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
 `;
 
 const SectionTitle = styled(Title)`
@@ -163,8 +172,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
                   active={selectedCategory === category.id}
                   onPress={() => handleCategoryPress(category.id)}
                 >
+                  <CategoryImage source={require('../../assets/images/pizza_1.png')} />
                   <CategoryButtonText active={selectedCategory === category.id}>
-                    🍕 {category.label}
+                    {category.label}
                   </CategoryButtonText>
                 </CategoryButton>
               ))}
