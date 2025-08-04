@@ -155,7 +155,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
           <CategoryFilter 
             horizontal 
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: theme.spacing.md }}
           >
             {categories.map((category) => (
               <CategoryButton
