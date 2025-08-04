@@ -36,7 +36,7 @@ const ImageContainer = styled.View`
 const PizzaImage = styled.Image`
   width: 100%;
   height: 100%;
-  resize-mode: contain;
+  resize-mode: cover;
 `;
 
 const CategoryBadge = styled.View<{ category: string }>`
