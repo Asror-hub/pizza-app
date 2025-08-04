@@ -225,7 +225,6 @@ const Header: React.FC<HeaderProps> = ({
       <HeaderContent>
         <BrandSection>
           <RestaurantName>🍕 Pizza Palace</RestaurantName>
-          <RestaurantTagline>Delicious pizzas delivered to your door</RestaurantTagline>
           <DeliveryInfo>
             <DeliveryIcon>🚚</DeliveryIcon>
             <DeliveryText>
