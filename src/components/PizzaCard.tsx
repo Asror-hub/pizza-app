@@ -12,43 +12,41 @@ interface PizzaCardProps {
 }
 
 const CardContainer = styled.TouchableOpacity`
-  background-color: ${theme.colors.backgroundCard};
-  border-radius: ${theme.borderRadius.lg}px;
-  margin-top: ${theme.spacing.sm}px;
-  margin-bottom: ${theme.spacing.sm}px;
-  margin-horizontal: ${theme.spacing.sm}px;
-  border: 1px solid ${theme.colors.border};
-  overflow: hidden;
-  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  margin: 8px;
+  border: 1px solid #E2E8F0;
+  shadow-color: rgba(0, 0, 0, 0.1);
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.2;
+  shadow-radius: 4px;
+  elevation: 3;
 `;
 
-const GlassOverlay = styled.View`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: ${theme.glass.background};
-  border-radius: ${theme.borderRadius.lg}px;
-  z-index: 1;
-`;
+
 
 const ContentWrapper = styled.View`
+  padding: 16px;
+`;
+
+const TopRow = styled.View`
   flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 12px;
+`;
+
+const ImageSection = styled.View`
   align-items: center;
-  padding: ${theme.spacing.md}px;
-  position: relative;
-  z-index: 2;
+  margin-left: 16px;
 `;
 
 const ImageContainer = styled.View`
-  position: relative;
   width: 100px;
   height: 100px;
-  background-color: ${theme.colors.backgroundTertiary};
-  border-radius: ${theme.borderRadius.md}px;
+  background-color: #F1F5F9;
+  border-radius: 12px;
+  margin-bottom: 8px;
   overflow: hidden;
-  margin-right: ${theme.spacing.md}px;
 `;
 
 const PizzaImage = styled.Image`
@@ -86,7 +84,6 @@ const CategoryText = styled.Text`
 const ContentContainer = styled.View`
   flex: 1;
   justify-content: space-between;
-  height: 100px;
 `;
 
 const TopContent = styled.View`
@@ -94,26 +91,23 @@ const TopContent = styled.View`
 `;
 
 const PizzaName = styled.Text`
-  font-size: ${theme.typography.fontSize.lg}px;
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.textPrimary};
-  margin-bottom: ${theme.spacing.xs}px;
-  line-height: ${theme.typography.lineHeight.tight};
+  font-size: 18px;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 6px;
 `;
 
 const PizzaDescription = styled.Text`
-  font-size: ${theme.typography.fontSize.sm}px;
-  font-weight: ${theme.typography.fontWeight.regular};
-  color: ${theme.colors.textSecondary};
-  line-height: ${theme.typography.lineHeight.normal};
-  flex: 1;
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 20px;
+  margin-bottom: 12px;
 `;
 
 const BottomRow = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-top: ${theme.spacing.sm}px;
 `;
 
 const PriceContainer = styled.View`
@@ -137,7 +131,7 @@ const AddButton = styled.TouchableOpacity`
   background-color: ${theme.colors.primary};
   padding: ${theme.spacing.sm}px ${theme.spacing.md}px;
   border-radius: ${theme.borderRadius.round}px;
-  min-width: 80px;
+  width: 100px;
   align-items: center;
   justify-content: center;
   border: 1px solid ${theme.colors.primaryLight};
@@ -225,37 +219,35 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, onAddToCart, onPress, inde
       }}
     >
       <CardContainer onPress={() => onPress(pizza)} activeOpacity={0.9}>
-        <GlassOverlay />
         <ContentWrapper>
-          <ImageContainer>
-            <PizzaImage 
-              source={pizza.image} 
-              resizeMode="cover"
-            />
-            <CategoryBadge category={pizza.category}>
-              <CategoryText>{getCategoryLabel(pizza.category)}</CategoryText>
-            </CategoryBadge>
-          </ImageContainer>
-          
-          <ContentContainer>
+          <TopRow>
             <TopContent>
               <PizzaName>{pizza.name}</PizzaName>
-              <PizzaDescription numberOfLines={2}>{pizza.description}</PizzaDescription>
-            </TopContent>
-            
-            <BottomRow>
+              <PizzaDescription>{pizza.description}</PizzaDescription>
               <PriceContainer>
                 <Price>${pizza.price.toFixed(2)}</Price>
                 <PreparationTime>⏱️ {pizza.preparationTime} min</PreparationTime>
               </PriceContainer>
+            </TopContent>
+            
+            <ImageSection>
+              <ImageContainer>
+                <PizzaImage 
+                  source={pizza.image} 
+                  resizeMode="cover"
+                />
+                <CategoryBadge category={pizza.category}>
+                  <CategoryText>{getCategoryLabel(pizza.category)}</CategoryText>
+                </CategoryBadge>
+              </ImageContainer>
               
               <Animated.View style={{ transform: [{ scale: buttonScaleAnim }] }}>
                 <AddButton onPress={handleViewDetails} activeOpacity={0.8}>
                   <AddButtonText>Order</AddButtonText>
                 </AddButton>
               </Animated.View>
-            </BottomRow>
-          </ContentContainer>
+            </ImageSection>
+          </TopRow>
         </ContentWrapper>
       </CardContainer>
     </Animated.View>

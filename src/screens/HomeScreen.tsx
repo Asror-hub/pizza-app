@@ -26,33 +26,55 @@ interface HomeScreenProps {
 }
 
 const CategoryFilter = styled.ScrollView`
-  margin-bottom: ${theme.spacing.lg}px;
-  padding-left: ${theme.spacing.xs}px;
+  margin-bottom: ${theme.spacing.sm}px;
+  padding-left: ${theme.spacing.sm}px;
+  padding-top: ${theme.spacing.xs}px;
 `;
 
 const CategoryButton = styled.TouchableOpacity<{ active: boolean }>`
-  padding: ${theme.spacing.sm}px ${theme.spacing.md}px;
-  margin-right: ${theme.spacing.sm}px;
-  border-radius: ${theme.borderRadius.round}px;
-  background-color: ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.backgroundTertiary};
-  border: 1px solid ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.border};
+  padding: ${theme.spacing.xs}px ${theme.spacing.sm}px;
+  margin-right: ${theme.spacing.md}px;
+  border-radius: ${theme.borderRadius.lg}px;
+  background-color: ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.backgroundCard};
+  border: 2px solid ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.borderLight};
   flex-direction: row;
   align-items: center;
-  min-height: 36px;
+  min-height: 28px;
+  shadow-color: ${theme.colors.shadow};
+  shadow-offset: ${(props: { active: boolean }) => props.active ? '0px 4px' : '0px 2px'};
+  shadow-opacity: ${(props: { active: boolean }) => props.active ? 0.3 : 0.1};
+  shadow-radius: ${(props: { active: boolean }) => props.active ? 8 : 4};
+  elevation: ${(props: { active: boolean }) => props.active ? 6 : 2};
 `;
 
 const CategoryButtonText = styled.Text<{ active: boolean }>`
-  font-size: ${theme.typography.fontSize.sm}px;
-  font-weight: ${theme.typography.fontWeight.semibold};
+  font-size: ${theme.typography.fontSize.md}px;
+  font-weight: ${(props: { active: boolean }) => props.active ? theme.typography.fontWeight.bold : theme.typography.fontWeight.medium};
   color: ${(props: { active: boolean }) => props.active ? theme.colors.textInverse : theme.colors.textPrimary};
-  margin-left: 6px;
-  letter-spacing: 0.3px;
+  margin-left: ${theme.spacing.sm}px;
+  letter-spacing: 0.2px;
 `;
 
 const CategoryImage = styled.Image`
-  width: 16px;
-  height: 16px;
-  border-radius: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  opacity: 0.8;
+`;
+
+const CategoryIcon = styled.View<{ active: boolean }>`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: ${(props: { active: boolean }) => props.active ? theme.colors.textInverse : theme.colors.primaryLight};
+  justify-content: center;
+  align-items: center;
+`;
+
+const CategoryIconText = styled.Text<{ active: boolean }>`
+  font-size: ${theme.typography.fontSize.xs}px;
+  font-weight: ${theme.typography.fontWeight.bold};
+  color: ${(props: { active: boolean }) => props.active ? theme.colors.primary : theme.colors.textInverse};
 `;
 
 const SectionTitle = styled.Text`
@@ -94,11 +116,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
   const headerOpacity = useRef(new Animated.Value(1)).current;
   
   const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'classic', label: 'Classic' },
-    { id: 'premium', label: 'Premium' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'spicy', label: 'Spicy' },
+    { id: 'all', label: 'All', icon: '🍕', useImage: true },
+    { id: 'classic', label: 'Classic', icon: '🍕' },
+    { id: 'premium', label: 'Premium', icon: '⭐' },
+    { id: 'vegetarian', label: 'Vegetarian', icon: '🥬' },
+    { id: 'spicy', label: 'Spicy', icon: '🌶️' },
   ];
 
   // Filter pizzas by category and search query
@@ -183,20 +205,28 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onAddToCart, onCartPress, onPiz
       <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         {/* Category Filter - Hide when searching */}
         {!isSearchMode && (
-          <View style={{ paddingLeft: theme.spacing.xs, marginTop: theme.spacing.md }}>
+          <View style={{ paddingLeft: theme.spacing.xs, marginTop: theme.spacing.xs }}>
             <CategoryFilter
               horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingRight: theme.spacing.lg }}
+              contentContainerStyle={{ paddingRight: theme.spacing.sm }}
             >
               {categories.map((category) => (
                 <CategoryButton
                   key={category.id}
                   active={selectedCategory === category.id}
                   onPress={() => handleCategoryPress(category.id)}
-                  activeOpacity={0.7}
+                  activeOpacity={0.8}
                 >
-                  <CategoryImage source={require('../../assets/images/pizza_1.png')} />
+                  {category.useImage ? (
+                    <CategoryImage source={require('../../assets/images/pizza_1.png')} />
+                  ) : (
+                    <CategoryIcon active={selectedCategory === category.id}>
+                      <CategoryIconText active={selectedCategory === category.id}>
+                        {category.icon}
+                      </CategoryIconText>
+                    </CategoryIcon>
+                  )}
                   <CategoryButtonText active={selectedCategory === category.id}>
                     {category.label}
                   </CategoryButtonText>

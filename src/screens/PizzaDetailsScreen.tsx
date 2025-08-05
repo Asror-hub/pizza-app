@@ -25,39 +25,46 @@ const { height: screenHeight } = Dimensions.get('window');
 const ModalOverlay = styled.View`
   flex: 1;
   justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const ModalContainer = styled(Animated.View)`
   background-color: ${theme.colors.background};
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
   max-height: ${screenHeight * 0.95}px;
   min-height: ${screenHeight * 0.8}px;
+  shadow-color: rgba(0, 0, 0, 0.3);
+  shadow-offset: 0px -8px;
+  shadow-opacity: 0.4;
+  shadow-radius: 24px;
+  elevation: 20;
 `;
 
 const DragHandle = styled.View`
-  width: 40px;
-  height: 4px;
-  background-color: ${theme.colors.border};
-  border-radius: 2px;
+  width: 48px;
+  height: 6px;
+  background-color: ${theme.colors.borderDark};
+  border-radius: 3px;
   align-self: center;
-  margin-top: 12px;
-  margin-bottom: 8px;
+  margin-top: 16px;
+  margin-bottom: 12px;
 `;
 
 const PullDownText = styled.Text`
   text-align: center;
-  color: ${theme.colors.textSecondary};
+  color: ${theme.colors.textTertiary};
   font-size: ${theme.typography.fontSize.xs}px;
-  margin-bottom: ${theme.spacing.sm}px;
+  margin-bottom: ${theme.spacing.md}px;
+  font-weight: ${theme.typography.fontWeight.medium};
 `;
 
 const HeaderContainer = styled.View`
   position: relative;
-  height: 200px;
+  height: 240px;
   background-color: ${theme.colors.backgroundSecondary};
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
   overflow: hidden;
 `;
 
@@ -67,56 +74,65 @@ const PizzaImage = styled.Image`
   resize-mode: cover;
 `;
 
+const ImageOverlay = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+`;
+
 const CategoryBadge = styled.View<{ category: string }>`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
   background-color: ${(props: { category: string }) => {
     switch (props.category) {
       case 'classic': return theme.colors.primary;
       case 'premium': return theme.colors.accent;
-      case 'vegetarian': return theme.colors.success;
+      case 'vegetarian': return theme.colors.secondary;
       case 'spicy': return theme.colors.error;
       default: return theme.colors.primary;
     }
   }};
   padding: ${theme.spacing.sm}px ${theme.spacing.md}px;
-  border-radius: ${theme.borderRadius.lg}px;
+  border-radius: ${theme.borderRadius.xl}px;
   shadow-color: rgba(0, 0, 0, 0.3);
-  shadow-offset: 0px 2px;
+  shadow-offset: 0px 4px;
   shadow-opacity: 0.4;
-  shadow-radius: 4px;
-  elevation: 4;
+  shadow-radius: 8px;
+  elevation: 6;
 `;
 
 const CategoryText = styled.Text`
   font-size: ${theme.typography.fontSize.xs}px;
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.textInverse};
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 `;
 
 const CloseButton = styled.TouchableOpacity`
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 24px;
+  left: 24px;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: ${theme.borderRadius.round}px;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   align-items: center;
   justify-content: center;
   shadow-color: rgba(0, 0, 0, 0.2);
-  shadow-offset: 0px 3px;
+  shadow-offset: 0px 4px;
   shadow-opacity: 0.3;
-  shadow-radius: 6px;
-  elevation: 5;
+  shadow-radius: 8px;
+  elevation: 8;
 `;
 
 const ContentContainer = styled.ScrollView`
-  padding: ${theme.spacing.xl}px;
-  padding-bottom: 120px;
+  padding: ${theme.spacing.xl}px ${theme.spacing.xxxl}px ${theme.spacing.xxxl}px;
+  padding-bottom: 140px;
   background-color: ${theme.colors.background};
 `;
 
@@ -124,19 +140,25 @@ const PizzaName = styled(Title)`
   margin-bottom: ${theme.spacing.md}px;
   font-size: ${theme.typography.fontSize.xxl}px;
   line-height: ${theme.typography.lineHeight.tight * theme.typography.fontSize.xxl}px;
+  color: ${theme.colors.textPrimary};
+  font-weight: ${theme.typography.fontWeight.extrabold};
+  letter-spacing: -1px;
 `;
 
 const PizzaDescription = styled(BodyText)`
   color: ${theme.colors.textSecondary};
-  margin-bottom: ${theme.spacing.xl}px;
-  line-height: ${theme.typography.lineHeight.relaxed * theme.typography.fontSize.md}px;
-  font-size: ${theme.typography.fontSize.md}px;
+  margin-bottom: ${theme.spacing.xxxl}px;
+  line-height: ${theme.typography.lineHeight.relaxed * theme.typography.fontSize.lg}px;
+  font-size: ${theme.typography.fontSize.lg}px;
+  font-weight: ${theme.typography.fontWeight.regular};
 `;
 
 const SectionTitle = styled(Subtitle)`
-  margin-bottom: ${theme.spacing.lg}px;
+  margin-bottom: ${theme.spacing.xl}px;
   font-size: ${theme.typography.fontSize.xl}px;
   color: ${theme.colors.textPrimary};
+  font-weight: ${theme.typography.fontWeight.regular};
+  letter-spacing: -0.5px;
 `;
 
 const IngredientsContainer = styled.View`
@@ -149,9 +171,12 @@ const IngredientsContainer = styled.View`
 const IngredientItem = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: ${theme.spacing.xs}px 0;
-  margin-bottom: ${theme.spacing.xs}px;
+  padding: ${theme.spacing.xs}px ${theme.spacing.sm}px;
+  margin-bottom: ${theme.spacing.sm}px;
   width: 48%;
+  background-color: ${theme.colors.backgroundSecondary};
+  border-radius: ${theme.borderRadius.md}px;
+  border: 1px solid ${theme.colors.borderLight};
 `;
 
 const IngredientDot = styled.View`
@@ -159,85 +184,99 @@ const IngredientDot = styled.View`
   height: 6px;
   border-radius: ${theme.borderRadius.round}px;
   background-color: ${theme.colors.primary};
-  margin-right: ${theme.spacing.md}px;
+  margin-right: ${theme.spacing.sm}px;
 `;
 
 const IngredientText = styled(BodyText)`
   flex: 1;
   font-size: ${theme.typography.fontSize.sm}px;
+  font-weight: ${theme.typography.fontWeight.medium};
+  color: ${theme.colors.textPrimary};
 `;
 
 const ToppingsContainer = styled.View`
-  margin-bottom: ${theme.spacing.lg}px;
+  margin-bottom: ${theme.spacing.xxxl}px;
 `;
 
 const ToppingItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: ${theme.spacing.sm}px 0;
+  padding: ${theme.spacing.xs}px ${theme.spacing.sm}px;
   margin-bottom: ${theme.spacing.xs}px;
+  background-color: ${theme.colors.backgroundSecondary};
+  border-radius: ${theme.borderRadius.sm}px;
+  border: 1px solid ${theme.colors.borderLight};
 `;
 
 const ToppingText = styled(BodyText)`
-  font-size: ${theme.typography.fontSize.sm}px;
+  font-size: ${theme.typography.fontSize.xs}px;
+  font-weight: ${theme.typography.fontWeight.medium};
   flex: 1;
+  color: ${theme.colors.textPrimary};
 `;
 
 const ToppingPrice = styled.Text`
-  font-size: ${theme.typography.fontSize.sm}px;
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-size: ${theme.typography.fontSize.xs}px;
+  font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.primary};
-  margin-right: ${theme.spacing.sm}px;
+  margin-right: ${theme.spacing.xs}px;
 `;
 
 const ToppingCheckbox = styled.View<{ selected: boolean }>`
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: ${theme.borderRadius.round}px;
   border: 2px solid ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : theme.colors.border};
   background-color: ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : 'transparent'};
   align-items: center;
   justify-content: center;
-  margin-right: ${theme.spacing.md}px;
+  margin-right: ${theme.spacing.xs}px;
+  shadow-color: ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : 'transparent'};
+  shadow-offset: 0px 2px;
+  shadow-opacity: ${(props: { selected: boolean }) => props.selected ? 0.3 : 0};
+  shadow-radius: 4px;
+  elevation: ${(props: { selected: boolean }) => props.selected ? 3 : 0};
 `;
 
 const SizeContainer = styled.View`
-  margin-bottom: ${theme.spacing.lg}px;
+  margin-bottom: ${theme.spacing.xxxl}px;
 `;
 
 const SizeOptions = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  gap: ${theme.spacing.md}px;
 `;
 
 const SizeButton = styled.TouchableOpacity<{ selected: boolean }>`
   flex: 1;
-  padding: ${theme.spacing.xs}px 4px;
-  margin: 0 ${theme.spacing.xs}px;
+  padding: ${theme.spacing.sm}px ${theme.spacing.xs}px;
   border-radius: ${theme.borderRadius.md}px;
   border: 2px solid ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : theme.colors.border};
   background-color: ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : theme.colors.backgroundSecondary};
   align-items: center;
   justify-content: center;
-  min-height: 15px;
-  shadow-color: ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : 'transparent'};
-  shadow-offset: 0px 3px;
-  shadow-opacity: ${(props: { selected: boolean }) => props.selected ? 0.4 : 0};
-  shadow-radius: 6px;
-  elevation: ${(props: { selected: boolean }) => props.selected ? 4 : 0};
+  min-height: 45px;
+  shadow-color: ${(props: { selected: boolean }) => props.selected ? theme.colors.primary : theme.colors.shadow};
+  shadow-offset: 0px 4px;
+  shadow-opacity: ${(props: { selected: boolean }) => props.selected ? 0.4 : 0.1};
+  shadow-radius: 8px;
+  elevation: ${(props: { selected: boolean }) => props.selected ? 6 : 2};
 `;
 
 const SizeButtonText = styled.Text<{ selected: boolean }>`
-  font-size: 13px;
-  font-weight: ${theme.typography.fontWeight.semibold};
+  font-size: ${theme.typography.fontSize.xs}px;
+  font-weight: ${theme.typography.fontWeight.bold};
   color: ${(props: { selected: boolean }) => props.selected ? theme.colors.textInverse : theme.colors.textPrimary};
   margin-bottom: ${theme.spacing.xs}px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;
 
 const SizePrice = styled.Text<{ selected: boolean }>`
-  font-size: 15px;
-  font-weight: ${theme.typography.fontWeight.bold};
+  font-size: ${theme.typography.fontSize.sm}px;
+  font-weight: ${theme.typography.fontWeight.extrabold};
   color: ${(props: { selected: boolean }) => props.selected ? theme.colors.textInverse : theme.colors.primary};
 `;
 
@@ -247,59 +286,61 @@ const FixedBottomBar = styled(Animated.View)`
   left: 0;
   right: 0;
   background-color: ${theme.colors.background};
-  padding: 10px 30px 20px 30px;
+  padding: ${theme.spacing.lg}px ${theme.spacing.xxxl}px ${theme.spacing.xl}px;
   border-top-width: 1px;
-  border-top-color: ${theme.colors.border};
+  border-top-color: ${theme.colors.borderLight};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   shadow-color: rgba(0, 0, 0, 0.1);
-  shadow-offset: 0px -2px;
+  shadow-offset: 0px -4px;
   shadow-opacity: 0.2;
-  shadow-radius: 4px;
-  elevation: 8;
+  shadow-radius: 8px;
+  elevation: 12;
 `;
 
 const QuantityContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0;
+  background-color: ${theme.colors.backgroundSecondary};
+  border-radius: ${theme.borderRadius.xl}px;
+  padding: ${theme.spacing.xs}px;
+  border: 1px solid ${theme.colors.borderLight};
 `;
 
 const QuantityButton = styled.TouchableOpacity`
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: ${theme.borderRadius.round}px;
-  border: 2px solid ${theme.colors.primary};
-  background-color: ${theme.colors.backgroundSecondary};
+  background-color: ${theme.colors.background};
   align-items: center;
   justify-content: center;
   shadow-color: rgba(0, 0, 0, 0.1);
   shadow-offset: 0px 2px;
   shadow-opacity: 0.2;
   shadow-radius: 4px;
-  elevation: 2;
+  elevation: 3;
 `;
 
 const QuantityText = styled.Text`
-  font-size: ${theme.typography.fontSize.lg}px;
+  font-size: ${theme.typography.fontSize.xl}px;
   font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.textPrimary};
-  min-width: 50px;
+  min-width: 60px;
   text-align: center;
 `;
 
 const AddToCartButton = styled(PrimaryButton)`
   flex: 1;
-  margin-left: ${theme.spacing.md}px;
-  padding: ${theme.spacing.md}px;
-  border-radius: ${theme.borderRadius.lg}px;
+  margin-left: ${theme.spacing.lg}px;
+  padding: ${theme.spacing.lg}px;
+  border-radius: ${theme.borderRadius.xl}px;
   shadow-color: ${theme.colors.primary};
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.3;
-  shadow-radius: 8px;
-  elevation: 6;
+  shadow-offset: 0px 6px;
+  shadow-opacity: 0.4;
+  shadow-radius: 12px;
+  elevation: 8;
   opacity: ${(props: { disabled: boolean }) => props.disabled ? 0.7 : 1};
 `;
 
@@ -309,7 +350,7 @@ const SuccessMessage = styled(Animated.View)`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;
   z-index: 1000;
@@ -317,35 +358,35 @@ const SuccessMessage = styled(Animated.View)`
 
 const SuccessContent = styled.View`
   background-color: ${theme.colors.background};
-  padding: ${theme.spacing.lg}px;
+  padding: ${theme.spacing.xxxl}px;
   border-radius: ${theme.borderRadius.xl}px;
   border: 3px solid ${theme.colors.primary};
   align-items: center;
   justify-content: center;
-  shadow-color: rgba(0, 0, 0, 0.3);
-  shadow-offset: 0px 8px;
-  shadow-opacity: 0.5;
-  shadow-radius: 16px;
-  elevation: 12;
-  min-width: 220px;
+  shadow-color: rgba(0, 0, 0, 0.4);
+  shadow-offset: 0px 12px;
+  shadow-opacity: 0.6;
+  shadow-radius: 24px;
+  elevation: 16;
+  min-width: 280px;
 `;
 
 const SuccessIcon = styled.Text`
-  font-size: 32px;
-  margin-bottom: ${theme.spacing.sm}px;
+  font-size: 48px;
+  margin-bottom: ${theme.spacing.md}px;
 `;
 
 const SuccessText = styled.Text`
   color: ${theme.colors.textPrimary};
-  font-size: ${theme.typography.fontSize.lg}px;
+  font-size: ${theme.typography.fontSize.xl}px;
   font-weight: ${theme.typography.fontWeight.bold};
   text-align: center;
-  margin-bottom: ${theme.spacing.xs}px;
+  margin-bottom: ${theme.spacing.sm}px;
 `;
 
 const SuccessSubtext = styled.Text`
   color: ${theme.colors.textSecondary};
-  font-size: ${theme.typography.fontSize.sm}px;
+  font-size: ${theme.typography.fontSize.md}px;
   text-align: center;
   font-weight: ${theme.typography.fontWeight.medium};
 `;
@@ -354,18 +395,22 @@ const InfoRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: ${theme.spacing.sm}px 0;
-  margin-bottom: ${theme.spacing.md}px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${theme.colors.borderLight};
+  padding: ${theme.spacing.sm}px ${theme.spacing.md}px;
+  margin-bottom: ${theme.spacing.lg}px;
+  background-color: ${theme.colors.backgroundSecondary};
+  border-radius: ${theme.borderRadius.md}px;
+  border: 1px solid ${theme.colors.borderLight};
 `;
 
 const InfoLabel = styled(CaptionText)`
   color: ${theme.colors.textSecondary};
+  font-weight: ${theme.typography.fontWeight.medium};
 `;
 
 const InfoValue = styled(BodyText)`
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-weight: ${theme.typography.fontWeight.bold};
+  color: ${theme.colors.textPrimary};
+  font-size: ${theme.typography.fontSize.md}px;
 `;
 
 const PizzaDetailsScreen: React.FC<PizzaDetailsScreenProps> = ({ 
@@ -625,7 +670,7 @@ const PizzaDetailsScreen: React.FC<PizzaDetailsScreenProps> = ({
             
             <HeaderContainer {...headerPanResponder.panHandlers}>
               <CloseButton onPress={onGoBack}>
-                <Text style={{ fontSize: 20, color: theme.colors.textPrimary }}>✕</Text>
+                <Text style={{ fontSize: 24, color: theme.colors.textPrimary, fontWeight: 'bold' }}>✕</Text>
               </CloseButton>
               
               <PizzaImage source={pizza.image} />
@@ -651,12 +696,6 @@ const PizzaDetailsScreen: React.FC<PizzaDetailsScreenProps> = ({
                 >
                   <PizzaName>{pizza.name}</PizzaName>
                   <PizzaDescription>{pizza.description}</PizzaDescription>
-
-                  {/* Pizza Info */}
-                  <InfoRow>
-                    <InfoLabel>Preparation Time</InfoLabel>
-                    <InfoValue>⏱️ {pizza.preparationTime} minutes</InfoValue>
-                  </InfoRow>
 
                   {/* Ingredients */}
                   <SectionTitle>Ingredients</SectionTitle>
@@ -701,7 +740,7 @@ const PizzaDetailsScreen: React.FC<PizzaDetailsScreenProps> = ({
                       >
                         <ToppingCheckbox selected={selectedToppings.includes(topping.name)}>
                           {selectedToppings.includes(topping.name) && (
-                            <Text style={{ color: 'white', fontSize: 10, lineHeight: 20 }}>✓</Text>
+                            <Text style={{ color: 'white', fontSize: 12, lineHeight: 24, fontWeight: 'bold' }}>✓</Text>
                           )}
                         </ToppingCheckbox>
                         <ToppingText>{topping.name}</ToppingText>
@@ -711,7 +750,7 @@ const PizzaDetailsScreen: React.FC<PizzaDetailsScreenProps> = ({
                   </ToppingsContainer>
 
                   {/* Spacer for bottom bar */}
-                  <View style={{ height: 320 }} />
+                  <View style={{ height: 140 }} />
 
                 </ContentContainer>
               </Animated.View>

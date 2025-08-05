@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
+import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../styles/theme';
 import { restaurantInfo } from '../data/restaurant';
 
@@ -18,9 +19,7 @@ interface HeaderProps {
 
 const HeaderContainer = styled(Animated.View)`
   background-color: ${theme.colors.backgroundSecondary};
-  padding: ${theme.spacing.lg}px ${theme.spacing.lg}px ${theme.spacing.md}px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${theme.colors.border};
+  padding: ${theme.spacing.huge}px ${theme.spacing.lg}px ${theme.spacing.md}px;
   position: relative;
   overflow: hidden;
 `;
@@ -49,22 +48,18 @@ const BrandSection = styled.View`
 `;
 
 const RestaurantName = styled.Text`
-  font-size: ${theme.typography.fontSize.xxl}px;
+  font-size: ${theme.typography.fontSize.xxxl}px;
   font-weight: ${theme.typography.fontWeight.extrabold};
   color: ${theme.colors.textPrimary};
   margin-bottom: ${theme.spacing.xs}px;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
+  line-height: ${theme.typography.fontSize.xxxl + 4}px;
 `;
 
 const DeliveryInfo = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: ${theme.spacing.xs}px;
-`;
-
-const DeliveryIcon = styled.Text`
-  font-size: ${theme.typography.fontSize.sm}px;
-  margin-right: ${theme.spacing.xs}px;
 `;
 
 const DeliveryText = styled.Text`
@@ -82,13 +77,7 @@ const ActionButton = styled.TouchableOpacity`
   height: 44px;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${theme.colors.border};
   margin-left: ${theme.spacing.sm}px;
-`;
-
-const ActionIcon = styled.Text`
-  font-size: ${theme.typography.fontSize.lg}px;
-  color: ${theme.colors.textPrimary};
 `;
 
 const CartBadge = styled.View`
@@ -128,7 +117,7 @@ const SearchInput = styled.TextInput`
   margin-left: ${theme.spacing.sm}px;
 `;
 
-const SearchIcon = styled.Text`
+const SearchIcon = styled(Ionicons)`
   font-size: ${theme.typography.fontSize.md}px;
   color: ${theme.colors.textSecondary};
 `;
@@ -144,6 +133,11 @@ const CancelText = styled.Text`
   font-size: ${theme.typography.fontSize.md}px;
   color: ${theme.colors.textPrimary};
   font-weight: ${theme.typography.fontWeight.medium};
+`;
+
+const ActionIcon = styled(Ionicons)`
+  font-size: ${theme.typography.fontSize.lg}px;
+  color: ${theme.colors.textPrimary};
 `;
 
 const Header: React.FC<HeaderProps> = ({ 
@@ -206,7 +200,7 @@ const Header: React.FC<HeaderProps> = ({
         <GlassBackground />
         <HeaderContent>
           <SearchContainer>
-            <SearchIcon>🔍</SearchIcon>
+            <SearchIcon name="search" size={20} />
             <SearchInput
               placeholder="Search pizzas..."
               placeholderTextColor={theme.colors.textTertiary}
@@ -235,9 +229,8 @@ const Header: React.FC<HeaderProps> = ({
       <GlassBackground />
       <HeaderContent>
         <BrandSection>
-          <RestaurantName>🍕 Pizza Palace</RestaurantName>
+          <RestaurantName>Pizza Palace</RestaurantName>
           <DeliveryInfo>
-            <DeliveryIcon>🚚</DeliveryIcon>
             <DeliveryText>
               Free delivery within 2km
             </DeliveryText>
@@ -246,13 +239,12 @@ const Header: React.FC<HeaderProps> = ({
         
         {showSearch && (
           <ActionButton onPress={onSearchPress} activeOpacity={0.7}>
-            <ActionIcon>🔍</ActionIcon>
+            <ActionIcon name="search" size={20} />
           </ActionButton>
         )}
         
         {showBack && (
           <ActionButton onPress={onSearchPress} activeOpacity={0.7}>
-            <ActionIcon>←</ActionIcon>
           </ActionButton>
         )}
       </HeaderContent>

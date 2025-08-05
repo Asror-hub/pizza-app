@@ -1,49 +1,49 @@
 export const theme = {
   colors: {
-    // Modern primary colors - Deep purple to pink gradient theme
-    primary: '#6366F1', // Indigo
-    primaryDark: '#4F46E5',
-    primaryLight: '#A5B4FC',
-    secondary: '#EC4899', // Pink
-    secondaryDark: '#DB2777',
-    secondaryLight: '#F9A8D4',
+    // Fresh modern colors - Clean and contemporary
+    primary: '#3B82F6', // Bright blue
+    primaryDark: '#2563EB',
+    primaryLight: '#93C5FD',
+    secondary: '#10B981', // Emerald green
+    secondaryDark: '#059669',
+    secondaryLight: '#6EE7B7',
     
-    // Accent colors
-    accent: '#10B981', // Emerald green
-    accentDark: '#059669',
-    accentLight: '#6EE7B7',
-    warning: '#F59E0B', // Amber
-    error: '#EF4444', // Red
-    info: '#3B82F6', // Blue
+    // Accent colors - Clean and distinct
+    accent: '#F59E0B', // Amber
+    accentDark: '#D97706',
+    accentLight: '#FCD34D',
+    warning: '#EF4444', // Red
+    error: '#DC2626', // Dark red
+    info: '#8B5CF6', // Purple
     
-    // Modern background colors - Dark theme inspired
-    background: '#0F172A', // Slate 900
-    backgroundSecondary: '#1E293B', // Slate 800
-    backgroundTertiary: '#334155', // Slate 700
-    backgroundCard: '#1E293B', // Slate 800
-    backgroundElevated: '#334155', // Slate 700
+    // Clean background colors - Light and modern
+    background: '#FFFFFF', // Pure white
+    backgroundSecondary: '#F8FAFC', // Slate 50
+    backgroundTertiary: '#F1F5F9', // Slate 100
+    backgroundCard: '#FFFFFF', // White cards
+    backgroundElevated: '#F8FAFC', // Light elevated
     
-    // Text colors for dark theme
-    textPrimary: '#F8FAFC', // Slate 50
-    textSecondary: '#CBD5E1', // Slate 300
-    textTertiary: '#64748B', // Slate 500
-    textInverse: '#0F172A', // Slate 900
-    textMuted: '#94A3B8', // Slate 400
+    // Dark text colors - High contrast on light backgrounds
+    textPrimary: '#0F172A', // Slate 900 - Dark text
+    textSecondary: '#475569', // Slate 600 - Medium text
+    textTertiary: '#64748B', // Slate 500 - Muted text
+    textInverse: '#FFFFFF', // White text on dark backgrounds
+    textMuted: '#94A3B8', // Slate 400 - Very muted
     
-    // Border colors
-    border: '#334155', // Slate 700
-    borderLight: '#475569', // Slate 600
-    borderDark: '#1E293B', // Slate 800
+    // Clean border colors - Subtle and modern
+    border: '#E2E8F0', // Slate 200 - Light borders
+    borderLight: '#F1F5F9', // Slate 100 - Very light
+    borderDark: '#CBD5E1', // Slate 300 - Darker borders
     
-    // Shadow colors for dark theme
-    shadow: 'rgba(0, 0, 0, 0.3)',
-    shadowDark: 'rgba(0, 0, 0, 0.5)',
-    shadowLight: 'rgba(0, 0, 0, 0.1)',
+    // Subtle shadow colors - Clean and modern
+    shadow: 'rgba(0, 0, 0, 0.1)',
+    shadowDark: 'rgba(0, 0, 0, 0.2)',
+    shadowLight: 'rgba(0, 0, 0, 0.05)',
     
-    // Gradient colors
-    gradientStart: '#6366F1',
-    gradientEnd: '#EC4899',
-    gradientCard: '#1E293B',
+    // Clean gradient colors
+    gradientStart: '#3B82F6',
+    gradientEnd: '#10B981',
+    gradientCard: '#FFFFFF',
   },
   
   typography: {
@@ -106,32 +106,32 @@ export const theme = {
   
   shadows: {
     sm: {
-      shadowColor: 'rgba(0, 0, 0, 0.3)',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 3,
+      shadowColor: 'rgba(0, 0, 0, 0.1)',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      elevation: 2,
     },
     md: {
-      shadowColor: 'rgba(0, 0, 0, 0.3)',
+      shadowColor: 'rgba(0, 0, 0, 0.1)',
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,
-      elevation: 6,
+      elevation: 4,
     },
     lg: {
-      shadowColor: 'rgba(0, 0, 0, 0.3)',
+      shadowColor: 'rgba(0, 0, 0, 0.1)',
       shadowOffset: { width: 0, height: 8 },
       shadowOpacity: 0.4,
       shadowRadius: 16,
-      elevation: 12,
+      elevation: 8,
     },
     glow: {
-      shadowColor: '#6366F1',
+      shadowColor: '#3B82F6',
       shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.3,
       shadowRadius: 12,
-      elevation: 8,
+      elevation: 6,
     },
   },
   
@@ -158,18 +158,18 @@ export const theme = {
     },
   },
   
-  // New design tokens
+  // Clean design tokens
   glass: {
-    background: 'rgba(30, 41, 59, 0.8)',
-    border: 'rgba(255, 255, 255, 0.1)',
+    background: 'rgba(255, 255, 255, 0.9)',
+    border: 'rgba(0, 0, 0, 0.1)',
     backdrop: 'blur(20px)',
   },
   
   gradients: {
-    primary: ['#6366F1', '#EC4899'],
-    secondary: ['#10B981', '#3B82F6'],
-    card: ['#1E293B', '#334155'],
-    button: ['#6366F1', '#4F46E5'],
+    primary: ['#3B82F6', '#10B981'],
+    secondary: ['#F59E0B', '#EF4444'],
+    card: ['#FFFFFF', '#F8FAFC'],
+    button: ['#3B82F6', '#2563EB'],
   },
 };
 
